@@ -50,6 +50,8 @@ function loadFeed(id, cb) {
      * is executed.
      */
     feed.load(function(result) {
+        var self = this;
+
         if (!result.error) {
             /* If loading the feed did not result in an error,
              * get started making the DOM manipulations required
@@ -77,6 +79,13 @@ function loadFeed(id, cb) {
         if (cb) {
             cb();
         }
+
+        setTimeout(function() {
+        self.initialComplete = true;
+        if(cb) {
+            return cb();
+        }
+        },5);
     });
 }
 
